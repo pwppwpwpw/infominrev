@@ -1,4 +1,4 @@
-# InfoMinRev: Towards Compact Reversible Image Representations for Neural Style Transfer
+# Towards Compact Reversible Image Representations for Neural Style Transfer
 
 [Paper](https://link.springer.com/chapter/10.1007/978-3-031-72848-8_15) • Project Page: `site/index.html` • Code: this repo
 
@@ -97,11 +97,13 @@ python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/stylize.py 
 ## Citation
 
 ```
-@inproceedings{infominrev,
-  title={Towards Compact Reversible Image Representations for Neural Style Transfer},
+@inproceedings{liu2024towards,
+  title={Towards compact reversible image representations for neural style transfer},
   author={Liu, Xiyao and Yang, Siyu and Zhang, Jian and Schaefer, Gerald and Li, Jiya and Fan, Xunli and Wu, Songtao and Fang, Hui},
-  booktitle={ECCV},
-  year={2024}
+  booktitle={European Conference on Computer Vision},
+  pages={252--268},
+  year={2024},
+  organization={Springer}
 }
 ```
 
