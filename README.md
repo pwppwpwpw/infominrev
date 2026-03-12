@@ -53,8 +53,8 @@ pip install torch torchvision pillow numpy
 2. 启动训练：
 
 ```bash
-python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/train.py \
-  --config /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/configs/default.json
+python3 scripts/train.py \
+  --config configs/default.json
 ```
 
 ---
@@ -62,8 +62,8 @@ python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/train.py \
 ## Inference / Stylization
 
 ```bash
-python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/stylize.py \
-  --config /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/configs/default.json \
+python3 scripts/stylize.py \
+  --config configs/default.json \
   --checkpoint /path/to/checkpoint.pth \
   --content /path/to/content_dir_or_image \
   --style /path/to/style_dir_or_image \
