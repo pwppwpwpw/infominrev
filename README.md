@@ -1,12 +1,20 @@
 # InfoMinRev: Towards Compact Reversible Image Representations for Neural Style Transfer
 
-**Paper** • **Model** • **Dataset** • **Citation**
+[Paper](https://link.springer.com/chapter/10.1007/978-3-031-72848-8_15) • Project Page: `site/index.html` • Code: this repo
 
-本仓库是论文 *"Towards Compact Reversible Image Representations for Neural Style Transfer"* 的**规范化重构实现**，对齐论文提出的 InfoMinRev 架构与损失设计，并提供配置化的训练与推理入口。
+本仓库提供论文 *"Towards Compact Reversible Image Representations for Neural Style Transfer"* 的实现与训练/推理入口，包含模型结构、损失设计与高分辨率结果展示。
 
-## News and Updates
+---
 
-- 2026.03.11：完成全量重构，结构与损失对齐论文，提供 config-driven 训练/推理流程。
+## Demo Results (High-Resolution)
+
+![Demo Results](assets/fig9.png)
+
+## Model Architecture
+
+![InfoMinRev Module](assets/fig4_infominrev_clean.png)
+
+---
 
 ## Paper Overview
 
@@ -16,6 +24,8 @@
 - **Barlow Twins 通道去相关**：减少通道耦合，增强内容表达能力。
 - **Jensen–Shannon 风格分布对齐**：替代传统均值/方差 L2 风格损失，缓解过/欠风格化。
 
+---
+
 ## Installation
 
 推荐 Python 3.8+：
@@ -24,26 +34,7 @@
 pip install torch torchvision pillow numpy
 ```
 
-如需复现论文环境，可根据你的 GPU/PyTorch 版本补充依赖。
-
-## Repository Structure
-
-- `infominrev/`：核心包
-- `infominrev/models/`：InfoMinRev + VGG 编码器
-- `infominrev/losses/`：Content / JSD / Barlow / NMI-KDE
-- `infominrev/engine.py`：训练引擎（Trainer）
-- `infominrev/data.py`：数据与 DataLoader
-- `scripts/`：训练与推理入口
-- `configs/`：JSON 配置
-- `legacy/`：原始代码快照（保留以便对照）
-
-## Model Architecture
-
-- **20 个 InfoMinRev 模块 + 2 次 squeeze**（默认分配为 `[7, 7, 6]`）
-- **PAC 耦合层 + 可逆变换**对齐论文 Eq.(1)(2)
-- **AdaIN** 作为 latent space transfer 模块
-
-如需结构示意图，请参考论文 Fig. 3 和 Fig. 4。
+---
 
 ## Training
 
@@ -66,6 +57,8 @@ python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/train.py \
   --config /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/configs/default.json
 ```
 
+---
+
 ## Inference / Stylization
 
 ```bash
@@ -77,16 +70,31 @@ python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/stylize.py 
   --output /path/to/output_dir
 ```
 
-## Loss Design (Aligned to Paper)
+---
 
-- **Content Loss**：Eq.(11)，使用 relu4_2 特征并归一化。
-- **JSD Style Loss**：Eq.(9)，均值/方差分布 JSD，含 warmup 阶段。
-- **Barlow Twins Loss**：Eq.(7)(8)，按相关系数矩阵定义。
-- **Mutual Information Loss**：Eq.(3)(6)，KDE + NMI。
+## Loss Design
+
+- **Content Loss**：使用 relu4_2 特征并归一化，确保结构一致性。
+- **JSD Style Loss**：在特征均值/方差分布上进行 JSD 对齐，含 warmup 阶段。
+- **Barlow Twins Loss**：约束通道相关性，减少冗余耦合。
+- **Mutual Information Loss**：基于 KDE 的 NMI 最小化，压缩模块间冗余信息。
+
+---
+
+## Repository Structure
+
+- `infominrev/`：核心包
+- `infominrev/models/`：InfoMinRev + VGG 编码器
+- `infominrev/losses/`：Content / JSD / Barlow / NMI-KDE
+- `infominrev/engine.py`：训练引擎（Trainer）
+- `infominrev/data.py`：数据与 DataLoader
+- `configs/`：JSON 配置
+- `scripts/`：训练与推理入口
+ 
+
+---
 
 ## Citation
-
-如果你使用本代码，请引用论文：
 
 ```
 @inproceedings{infominrev,
@@ -96,6 +104,8 @@ python3 /Users/yixiao/Desktop/杨思宇-备份/infominrev_v3/scripts/stylize.py 
   year={2024}
 }
 ```
+
+---
 
 ## Acknowledgments
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfoMinRev — Compact Reversible Representations for Style Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">ECCV 2024 • InfoMinRev</p>
+      <h1>Compact Reversible Representations<br />for Neural Style Transfer</h1>
+      <p class="subhead">
+        Implementation of <em>Towards Compact Reversible Image Representations for Neural Style Transfer</em>,
+        featuring the InfoMinRev architecture, Barlow Twins redundancy reduction, and Jensen–Shannon style alignment.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://link.springer.com/chapter/10.1007/978-3-031-72848-8_15" target="_blank" rel="noreferrer">Paper</a>
+        <a class="btn ghost" href="../README.md">Repository</a>
+      </div>
+      <div class="meta">
+        <span>MS-COCO + WikiArt</span>
+        <span>20 InfoMinRev Blocks</span>
+        <span>JSD + Barlow + NMI</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-title">High-Resolution Demo</div>
+      <img src="../assets/fig9.png" alt="InfoMinRev demo results" />
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="highlights">
+      <h2>Core Contributions</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>InfoMinRev Module</h3>
+          <p>Reversible flow blocks with PAC coupling. Mutual information minimization encourages compact features without losing content expressiveness.</p>
+        </div>
+        <div class="card">
+          <h3>Barlow Twins Loss</h3>
+          <p>Channel-wise redundancy reduction via cross-correlation constraints, improving content structure preservation.</p>
+        </div>
+        <div class="card">
+          <h3>JSD Style Alignment</h3>
+          <p>Jensen–Shannon divergence aligns style feature distributions to reduce over- and under-stylization.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="architecture">
+      <div class="section-head">
+        <h2>Architecture</h2>
+        <p>InfoMinRev module structure (forward and backward paths) with PAC/IPAC coupling.</p>
+      </div>
+      <div class="figure">
+        <img src="../assets/fig4_infominrev_clean.png" alt="InfoMinRev module architecture" />
+        <div class="caption">Fig. 4 — InfoMinRev reversible module with PAC coupling.</div>
+      </div>
+    </section>
+
+    <section class="section" id="losses">
+      <div class="section-head">
+        <h2>Loss Design</h2>
+        <p>Training objective combines content preservation, style distribution alignment, and redundancy reduction.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Content Loss</h3>
+          <p>Normalized feature loss at VGG relu4_2 for structural preservation.</p>
+        </div>
+        <div class="card">
+          <h3>JSD Style Loss</h3>
+          <p>Distribution alignment on feature mean and variance, with warmup for stable gradients.</p>
+        </div>
+        <div class="card">
+          <h3>Barlow Twins</h3>
+          <p>Correlation matrix constraints reduce channel coupling without harming transferability.</p>
+        </div>
+        <div class="card">
+          <h3>NMI</h3>
+          <p>KDE-based mutual information minimization between successive blocks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="section-head">
+        <h2>Results</h2>
+        <p>High-resolution qualitative examples.</p>
+      </div>
+      <div class="figure">
+        <img src="../assets/fig9.png" alt="Qualitative comparison grid" />
+        <div class="caption">High-resolution (768 × 768) transfer results.</div>
+      </div>
+    </section>
+
+    <section class="section" id="usage">
+      <div class="section-head">
+        <h2>Usage</h2>
+        <p>Config-driven training and stylization. See README for full details.</p>
+      </div>
+      <div class="code-block">
+        <pre><code>python3 scripts/train.py --config configs/default.json
+
+python3 scripts/stylize.py \
+  --config configs/default.json \
+  --checkpoint /path/to/checkpoint.pth \
+  --content /path/to/content \
+  --style /path/to/style \
+  --output /path/to/output</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="section-head">
+        <h2>Citation</h2>
+      </div>
+      <div class="code-block">
+        <pre><code>@inproceedings{infominrev,
+  title={Towards Compact Reversible Image Representations for Neural Style Transfer},
+  author={Liu, Xiyao and Yang, Siyu and Zhang, Jian and Schaefer, Gerald and Li, Jiya and Fan, Xunli and Wu, Songtao and Fang, Hui},
+  booktitle={ECCV},
+  year={2024}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>InfoMinRev Project</span>
+      <span>Paper: ECCV 2024</span>
+    </div>
+  </footer>
+</body>
+</html>
